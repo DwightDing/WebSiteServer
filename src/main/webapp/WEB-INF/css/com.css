@@ -1,0 +1,114 @@
+.back
+{
+    background-image: url("../images/bg.jpg" );
+    background-size: cover;
+}
+.carousel-control {
+    position: absolute;
+    top: 0;
+    /* left: 15px; */
+    width: 40px;
+    /* height: 40px; */
+    margin-top: 0px;
+    font-size: 60px;
+    font-weight: 100;
+    line-height: 250px;
+    color: #ffffff;
+    text-align: center;
+    /* background: #222222; */
+    border: 0px solid #ffffff;
+    -webkit-border-radius: 23px;
+    -moz-border-radius: 23px;
+    border-radius: 0px;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+.carousel-control.right {
+    left: auto;
+    right: 0px;
+}
+.carousel-caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 15px;
+    background: #333333;
+    background: rgba(0, 0, 0, 0.75);
+    text-align: left;
+    padding-top: 0px;
+    padding-bottom: 0px;
+
+}
+
+.carousel-caption h4, .carousel-caption p {
+    color: #ffffff;
+    line-height: 20px;
+}
+
+.carousel-caption h4 {
+    margin: 0 0 5px;
+}
+
+.carousel-caption p {
+    margin-bottom: 0;
+}
+.carousel-indicators{
+	position: absolute;
+bottom: 0px;
+right: 15px;
+z-index: 100;
+margin: 0;
+list-style: none;
+}
+/*
+* Style tweaks
+* --------------------------------------------------
+*/
+
+
+/*
+ * Off Canvas
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 767px) {
+    .row-offcanvas {
+        position: relative;
+        -webkit-transition: all .25s ease-out;
+        -o-transition: all .25s ease-out;
+        transition: all .25s ease-out;
+    }
+
+    .row-offcanvas-right {
+        right: 0;
+    }
+
+    .row-offcanvas-left {
+        left: 0;
+    }
+
+    .row-offcanvas-right
+    .sidebar-offcanvas {
+        right: -50%; /* 6 columns */
+    }
+
+    .row-offcanvas-left
+    .sidebar-offcanvas {
+        left: -50%; /* 6 columns */
+    }
+
+    .row-offcanvas-right.active {
+        right: 50%; /* 6 columns */
+    }
+
+    .row-offcanvas-left.active {
+        left: 50%; /* 6 columns */
+    }
+
+    .sidebar-offcanvas {
+        position: absolute;
+        top: 0;
+        width: 50%; /* 6 columns */
+    }
+}
