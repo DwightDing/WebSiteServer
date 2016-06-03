@@ -24,6 +24,8 @@
                         <li><a href="../index.do">首页</a></li>
                         <li><a href="http://blog.dwightding.cn">我的博客</a></li>
                         <li><a href="http://www.github.com/DwightDing">我的GitHub</a></li>
+                        <li><a href="http://www.dwightding.cn:9090">Openfire服务器</a></li>
+                        <li><a href="http://www.dwightding.cn/BmobServer">BmobServer</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/admin/login">登录</a></li>

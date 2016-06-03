@@ -19,7 +19,7 @@
         <data-type>varchar(100)</data-type>
       </column>
       <column id="6" parent="2" name="content">
-        <data-type>varchar(255)</data-type>
+        <data-type>varchar(20000)</data-type>
       </column>
       <column id="7" parent="2" name="user_id">
         <mandatory>1</mandatory>

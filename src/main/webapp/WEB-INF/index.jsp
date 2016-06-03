@@ -41,8 +41,10 @@
 
 
 <div class="container" style="padding-top: 100px">
-    <h1>如风的少年|iOS Developer</h1>
-    <hr/>
+    <div class="col-lg-12">
+        如风的少年|iOS Developer
+    </div>
+
 <div class="row">
     <c:if test="${!empty blogList}">
     <c:forEach items="${blogList}" var="blog">
