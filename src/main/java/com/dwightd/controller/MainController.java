@@ -36,6 +36,20 @@ public class MainController {
     }
 
     @RequestMapping(
+            value = {"/support"},
+            method = {RequestMethod.GET}
+    )
+    public String support() {
+        return "support";
+    }
+    @RequestMapping(
+            value = {"/private"},
+            method = {RequestMethod.GET}
+    )
+    public String pri() {
+        return "private";
+    }
+    @RequestMapping(
             value = {"/index.do"},
             method = {RequestMethod.GET}
     )
