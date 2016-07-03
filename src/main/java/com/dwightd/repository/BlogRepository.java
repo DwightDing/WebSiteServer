@@ -7,9 +7,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 public interface BlogRepository extends JpaRepository<BlogEntity, Integer> {
+    // 修改博文操作
     @Modifying
     @Transactional
-    @Query("update UserEntity us set us.nickname=:qNickname, us.firstName=:qFirstName, us.lastName=:qLastName, us.password=:qPassword where us.id=:qId")
-    void updateUser(@Param("qNickname") String var1, @Param("qFirstName") String var2, @Param("qLastName") String var3, @Param("qPassword") String var4, @Param("qId") Integer var5);
+    @Query("update BlogEntity blog set blog.title=:qTitle, blog.userByUserId.id=:qUserId," +
+            " blog.content=:qContent, blog.pubDate=:qPubDate where blog.id=:qId")
+    void updateBlog(@Param("qTitle") String title, @Param("qUserId") int userId, @Param("qContent") String content,
+                    @Param("qPubDate") Date pubDate, @Param("qId") int id);
 }

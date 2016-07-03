@@ -11,19 +11,18 @@
 <head>
     <script type="text/javascript">
         //iOS Web APP中点击链接跳转到Safari 浏览器新标签页的问题
-        if(("standalone" in window.navigator) && window.navigator.standalone){
+        if (("standalone" in window.navigator) && window.navigator.standalone) {
             var noddy, remotes = false;
-            document.addEventListener('click', function(event) {
+            document.addEventListener('click', function (event) {
                 noddy = event.target;
-                while(noddy.nodeName !== "A" && noddy.nodeName !== "HTML") {
+                while (noddy.nodeName !== "A" && noddy.nodeName !== "HTML") {
                     noddy = noddy.parentNode;
                 }
-                if('href' in noddy && noddy.href.indexOf('http') !== -1 && (noddy.href.indexOf(document.location.host) !== -1 || remotes))
-                {
+                if ('href' in noddy && noddy.href.indexOf('http') !== -1 && (noddy.href.indexOf(document.location.host) !== -1 || remotes)) {
                     event.preventDefault();
                     document.location.href = noddy.href;
                 }
-            },false);
+            }, false);
         }
     </script>
     <title>Likewind|如风的少年</title>
@@ -115,42 +114,30 @@
 </section>
 
 
-<!-- =========================
-    DETAIL SECTION
-============================== -->
+<%--歌词--%>
 <section id="detail" class="parallax-section">
     <div class="container">
         <div class="row">
 
-            <div class="wow fadeInLeft col-md-4 col-sm-4" data-wow-delay="0.3s">
-                <i class="fa fa-group"></i>
-                <h3>650 Participants</h3>
-                <p>Quisque ut libero sapien. Integer tellus nisl, efficitur sed dolor at, vehicula finibus massa. Sed
-                    tincidunt metus sed eleifend suscipit.</p>
+            <div class="wow fadeInLeft col-md-12 col-sm-12" data-wow-delay="0.3s">
+                <h3>如风的少年</h3>
+                <p>你飞到城市另一边
+                    <br/>你飞了好远好远
+                    <br/> 飞过了蓝色的海岸线
+                    <br/> 飞过了我们的昨天
+                    <br/> 你啊你，是自在如风的少年
+                    <br/> 飞在天地间，比梦还遥远
+                    <br/> 你啊你，飞过了流转的时间
+                    <br/> 归来的时候，是否还有青春的容颜
+                </p>
             </div>
 
-            <div class="wow fadeInUp col-md-4 col-sm-4" data-wow-delay="0.6s">
-                <i class="fa fa-clock-o"></i>
-                <h3>24 Programs</h3>
-                <p>Quisque ut libero sapien. Integer tellus nisl, efficitur sed dolor at, vehicula finibus massa. Sed
-                    tincidunt metus sed eleifend suscipit.</p>
-            </div>
-
-            <div class="wow fadeInRight col-md-4 col-sm-4" data-wow-delay="0.9s">
-                <i class="fa fa-microphone"></i>
-                <h3>11 Speakers</h3>
-                <p>Quisque ut libero sapien. Integer tellus nisl, efficitur sed dolor at, vehicula finibus massa. Sed
-                    tincidunt metus sed eleifend suscipit.</p>
-            </div>
 
         </div>
     </div>
 </section>
 
-
-<!-- =========================
-    VIDEO SECTION
-============================== -->
+<%--短途游--%>
 <section id="service" class="parallax-section">
     <div class="container">
         <div class="row">
