@@ -79,7 +79,7 @@ public class MainController {
     public String callback(ModelMap modelMap) {
         List blogList = this.blogRepository.findAll();
         modelMap.addAttribute("blogList", blogList);
-        return "index";
+        return "index_new";
     }
     @RequestMapping(
             value = {"/api/getbloglist.do"},//拦截器
