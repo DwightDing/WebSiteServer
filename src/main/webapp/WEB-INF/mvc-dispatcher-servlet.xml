@@ -53,5 +53,4 @@
     <mvc:resources location="/WEB-INF/css/" mapping="/admin/css/**" />
     <mvc:resources location="/WEB-INF/js/" mapping="/admin/js/**" />
     <mvc:resources location="/WEB-INF/fonts/" mapping="/admin/fonts/**" />
-
 </beans>

@@ -46,7 +46,20 @@
         </div>
         <div class="form-group">
             <label for="content">Content:</label>
-            <textarea class="form-control" id="content" name="content" rows="3" placeholder="Please Input Content"></textarea>
+            <!-- 加载编辑器的容器 -->
+            <script id="content" name="content" type="text/plain">
+        这里写你的初始化内容
+
+            </script>
+            <!-- 配置文件 -->
+            <script type="text/javascript" src="../js/ueditor.config.js"></script>
+            <!-- 编辑器源码文件 -->
+            <script type="text/javascript" src="../js/ueditor.all.js"></script>
+            <!-- 实例化编辑器 -->
+            <script type="text/javascript">
+                var ue = UE.getEditor('content');
+            </script>
+
         </div>
         <div class="form-group">
             <label for="pubDate">Publish Date:</label>

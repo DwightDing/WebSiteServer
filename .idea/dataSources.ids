@@ -13,6 +13,7 @@
       <column id="4" parent="2" name="id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
+        <sequence-identity>1</sequence-identity>
       </column>
       <column id="5" parent="2" name="title">
         <mandatory>1</mandatory>

@@ -120,12 +120,7 @@ public class MainController {
     // 添加博文，POST请求，重定向为查看博客页面
     @RequestMapping(value = "/admin/blogs/addP", method = RequestMethod.POST)
     public String addBlogPost(@ModelAttribute("blog") BlogEntity blogEntity) {
-        // 打印博客标题
-        System.out.println(blogEntity.getTitle());
-        // 打印博客作者
-        System.out.println(blogEntity.getUserByUserId().getNickname());
-        // 存库
-        blogRepository.saveAndFlush(blogEntity);
+        this.blogRepository.saveAndFlush(blogEntity);
         // 重定向地址
         return "redirect:/admin/blogs";
     }
@@ -142,5 +137,9 @@ public class MainController {
         blogRepository.delete(id);
         blogRepository.flush();
         return "redirect:/admin/blogs";
+    }
+    @RequestMapping("/controller")
+    public String control(){
+        return "controller";
     }
 }
