@@ -5,10 +5,10 @@
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
-            <property name="hibernate.connection.url" value="jdbc:mysql://127.0.0.1:3306/dwight"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://www.dwightding.cn:3306/dwight"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
             <property name="hibernate.connection.username" value="dwight"/>
-            <property name="hibernate.connection.password" value="123456"/>
+            <property name="hibernate.connection.password" value="🎤661216"/>
             <property name="hibernate.archive.autodetection" value="class"/>
             <!-- 显示SQL语句 -->
             <property name="hibernate.show_sql" value="true"/>
