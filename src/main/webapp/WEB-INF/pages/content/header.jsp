@@ -27,7 +27,27 @@
                         <li><a href="http://www.github.com/DwightDing">GitHub</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
+                        <%
+                            if (request.getSession().getAttribute("username") != null) {
+                        %>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <%=request.getSession().getAttribute("username").toString()%>
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/admin/manager">管理中心</a></li>
+                                <li><a href="/admin/logout">注销登陆</a></li>
+                            </ul>
+                        </li>
+                        <%
+                        } else {
+                        %>
                         <li><a href="/admin/login">登录</a></li>
+                        <%
+                            }
+                            ;
+                        %>
                     </ul>
                 </div>
             </nav>

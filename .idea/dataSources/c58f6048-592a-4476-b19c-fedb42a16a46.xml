@@ -1,14 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="defaultPersistenceUnit/Hibernate">
   <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
     <schema id="1" name="dwight">
       <visible>1</visible>
     </schema>
-    <schema id="2" name="information_schema" />
-    <schema id="3" name="mysql" />
-    <schema id="4" name="scheduling" />
-    <schema id="5" name="test" />
-    <table id="6" parent="1" name="blog" />
-    <table id="7" parent="1" name="user" />
+    <schema id="2" name="information_schema"/>
+    <schema id="3" name="mysql"/>
+    <schema id="4" name="scheduling"/>
+    <schema id="5" name="test"/>
+    <table id="6" parent="1" name="blog"/>
+    <table id="7" parent="1" name="user"/>
     <column id="8" parent="6" name="id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
@@ -37,7 +38,7 @@
     </column>
     <index id="15" parent="6" name="user_id_idx">
       <columns>user_id</columns>
-      <desc-columns />
+      <desc-columns></desc-columns>
     </index>
     <key id="16" parent="6" name="PRIMARY">
       <columns>id</columns>
@@ -57,19 +58,19 @@
     <column id="19" parent="7" name="nickname">
       <mandatory>1</mandatory>
       <data-type>varchar(45)|0</data-type>
-      <default-expression>''</default-expression>
+      <default-expression>&apos;&apos;</default-expression>
     </column>
     <column id="20" parent="7" name="password">
       <mandatory>1</mandatory>
       <data-type>varchar(45)|0</data-type>
-      <default-expression>''</default-expression>
+      <default-expression>&apos;&apos;</default-expression>
     </column>
     <column id="21" parent="7" name="first_name">
       <data-type>varchar(45)|0</data-type>
     </column>
     <column id="22" parent="7" name="last_name">
       <data-type>varchar(45)|0</data-type>
-      <default-expression>''</default-expression>
+      <default-expression>&apos;&apos;</default-expression>
     </column>
     <key id="23" parent="7" name="PRIMARY">
       <columns>Id</columns>

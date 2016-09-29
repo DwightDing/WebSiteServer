@@ -24,10 +24,7 @@ import com.sun.tracing.dtrace.Attributes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -44,11 +41,27 @@ public class MainController {
     }
 
     @RequestMapping(
+            value = {"/404"},
+            method = {RequestMethod.GET}
+    )
+    public String error() {
+        return "/404";
+    }
+
+    @RequestMapping(
             value = {"/"},
             method = {RequestMethod.GET}
     )
     public String index() {
         return "welcome";
+    }
+
+    @RequestMapping(
+            value = {"/index.do"},
+            method = {RequestMethod.GET}
+    )
+    public String callback(ModelMap modelMap) {
+        return "index_new";
     }
 
 
@@ -68,23 +81,75 @@ public class MainController {
         return "private";
     }
 
-    //    @RequestMapping(
-//            value = {"/new"},
-//            method = {RequestMethod.GET}
-//    )
-//    public void htmlView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-//        // ...
-//        request.getRequestDispatcher("/WEB-INF/pages/index_new.html").forward(request, response);
-//        //response.sendRedirect("http://www.baidu.com");
-//    }
-    @RequestMapping(
-            value = {"/index.do"},
-            method = {RequestMethod.GET}
-    )
-    public String callback(ModelMap modelMap) {
-        return "index_new";
+
+    @RequestMapping("/controller")
+    public String control() {
+        return "controller";
     }
 
+    //==================博文相关=========================
+    //    重定向
+    @RequestMapping(value = "/blogs", method = {RequestMethod.GET})
+    public String blogs() {
+
+        return "redirect:/blogs.do?pageNum=0";
+    }
+
+    @RequestMapping(value = "/blogs.do")
+    public String showBlogs(
+            @RequestParam("pageNum") int page,
+            ModelMap modelMap) {
+        List<BlogEntity> blogList = this.blogRepository.findbydate();
+        int size = blogList.size();
+        int allpages = (size - 1) / 5;
+        List<BlogEntity> returnlist = new ArrayList<BlogEntity>();
+        if (page <= size / 5) {
+            for (int i = page * 5; i < page * 5 + 5 && i < size; i++) {
+                returnlist.add(blogList.get(i));
+            }
+        }
+
+        modelMap.addAttribute("blogList", returnlist);
+        modelMap.addAttribute("allpages", allpages + 1);
+        modelMap.addAttribute("currentp", page);
+        if (page > 0) {
+            modelMap.addAttribute("lastp", page - 1);
+        } else {
+            modelMap.addAttribute("lastp", 0);
+        }
+        if (page < allpages) {
+            modelMap.addAttribute("nextp", page + 1);
+        } else {
+            modelMap.addAttribute("nextp", allpages);
+        }
+        return "admin/blogs";
+    }
+
+    //显示文章详细内容
+    @RequestMapping("/blogs/showArticle.do")
+    public String showBlog(@RequestParam("id") int id, ModelMap modelMap) {
+        BlogEntity blog = blogRepository.findOne(id);
+        modelMap.addAttribute("blog", blog);
+        List<BlogEntity> blogList = this.blogRepository.findbydate();
+        modelMap.addAttribute("firstid", blogList.get(0));
+        modelMap.addAttribute("lastid", blogList.get(blogList.size() - 1));
+        for (int i = 0; i < blogList.size(); i++) {
+            if (blogList.get(i).getId() == id) {
+                if (i + 1 < blogList.size()) {
+                    modelMap.addAttribute("ntitle", blogList.get(i + 1).getTitle());
+                    modelMap.addAttribute("ntitleid", blogList.get(i + 1).getId());
+                }
+                if (i - 1 >= 0) {
+                    modelMap.addAttribute("ltitle", blogList.get(i - 1).getTitle());
+                    modelMap.addAttribute("ltitleid", blogList.get(i - 1).getId());
+                }
+            }
+
+        }
+        return "admin/blogDetail";
+    }
+
+    //=============文章转json=================
     @RequestMapping(
             value = {"/api/getbloglist.do"},//拦截器
             method = {RequestMethod.GET}
@@ -108,20 +173,5 @@ public class MainController {
         } catch (IOException e) {
 
         }
-    }
-
-
-    @RequestMapping("/controller")
-    public String control() {
-        return "controller";
-    }
-
-    // 添加博文，POST请求，重定向为查看博客页面
-    @RequestMapping(value = "/login.do", method = RequestMethod.POST)
-    public String addLoginPost() {
-
-        System.out.print("hhhhh");
-         // 重定向地址
-        return "redirect:/admin/login";
     }
 }
