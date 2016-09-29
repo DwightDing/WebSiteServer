@@ -5,7 +5,16 @@ package com.dwightd.model;
  */
 public class blogModel {
     String title;
-    String content;
+
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
+
+    String describe;
 
     public String getTitle() {
         return title;
@@ -15,13 +24,7 @@ public class blogModel {
         this.title = title;
     }
 
-    public String getContent() {
-        return content;
-    }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
 
     @Override
     public String toString() {

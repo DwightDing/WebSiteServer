@@ -14,6 +14,8 @@ public class BlogEntity {
     private String content;
     private Date pubDate;
     private UserEntity userByUserId;
+    private String description;
+    private String tags;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -36,7 +38,7 @@ public class BlogEntity {
     }
 
     @Basic
-    @Column(name = "content", nullable = true, length = 255)
+    @Column(name = "content", nullable = true, length = -1)
     public String getContent() {
         return content;
     }
@@ -87,5 +89,25 @@ public class BlogEntity {
 
     public void setUserByUserId(UserEntity userByUserId) {
         this.userByUserId = userByUserId;
+    }
+
+    @Basic
+    @Column(name = "description", nullable = true, length = -1)
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Basic
+    @Column(name = "tags", nullable = true, length = 11)
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 }

@@ -17,13 +17,14 @@
                             data-target="#navbar-collapse-01">
                         <span class="sr-only"></span>
                     </button>
-                    <a class="navbar-brand" href="index.do">Likewind</a>
+                    <a class="navbar-brand" href="/index.do">如风的少年</a>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-collapse-01">
                     <ul class="nav navbar-nav navbar-left">
-                        <li><a href="../index.do">首页</a></li>
-                        <li><a href="http://blog.dwightding.cn">我的博客</a></li>
-                        <li><a href="http://www.github.com/DwightDing">我的GitHub</a></li>
+                        <li><a href="/blogs">博客首页</a></li>
+                        <li><a href="/index.do">网站首页</a></li>
+                        <li><a href="http://blog.dwightding.cn">Hexo</a></li>
+                        <li><a href="http://www.github.com/DwightDing">GitHub</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/admin/login">登录</a></li>

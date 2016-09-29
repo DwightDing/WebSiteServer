@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 public interface BlogRepository extends JpaRepository<BlogEntity, Integer> {
     // 修改博文操作
@@ -17,4 +18,6 @@ public interface BlogRepository extends JpaRepository<BlogEntity, Integer> {
             " blog.content=:qContent, blog.pubDate=:qPubDate where blog.id=:qId")
     void updateBlog(@Param("qTitle") String title, @Param("qUserId") int userId, @Param("qContent") String content,
                     @Param("qPubDate") Date pubDate, @Param("qId") int id);
+    @Query("select blog from BlogEntity blog order by blog.pubDate desc ")
+    List<BlogEntity> findbydate();
 }

@@ -37,6 +37,10 @@
             <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title:"/>
         </div>
         <div class="form-group">
+            <label for="description">Title:</label>
+            <input type="text" class="form-control" id="description" name="description" placeholder="Enter Title:"/>
+        </div>
+        <div class="form-group">
             <label for="userByUserId.id">Author:</label>
             <select class="form-control" id="userByUserId.id" name="userByUserId.id">
                 <c:forEach items="${userList}" var="user">

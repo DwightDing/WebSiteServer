@@ -7,58 +7,102 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html lang="zh-CN">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="org.springframework.web.util.UrlPathHelper" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//zh-CN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>SpringMVC 博文详情</title>
-
-    <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <script type="text/javascript">
+        //iOS Web APP中点击链接跳转到Safari 浏览器新标签页的问题
+        if (("standalone" in window.navigator) && window.navigator.standalone) {
+            var noddy, remotes = false;
+            document.addEventListener('click', function (event) {
+                noddy = event.target;
+                while (noddy.nodeName !== "A" && noddy.nodeName !== "HTML") {
+                    noddy = noddy.parentNode;
+                }
+                if ('href' in noddy && noddy.href.indexOf('http') !== -1 && (noddy.href.indexOf(document.location.host) !== -1 || remotes)) {
+                    event.preventDefault();
+                    document.location.href = noddy.href;
+                }
+            }, false);
+        }
+    </script>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1, minimum-scale=1.0, maximum-scale=1, user-scalable=no">
+    <title>${blog.title} |如风的少年</title>
+    <link href="/css/vendor/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/screen.css" rel="stylesheet"/>
+    <link href="/css/flat-ui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/com.css"/>
+    <script src="/js/vendor/jquery.min.js"></script>
+    <script src="/js/vendor/video.js"></script>
+    <script src="/js/flat-ui.min.js"></script>
+    <script src="/js/side-bar.js"></script>
 </head>
-<body>
-<div class="container">
-    <h1>SpringMVC 博文详情</h1>
-    <hr/>
+<body style="padding-bottom: 40px;background-color: #fbfbfb;height:100%">
+<jsp:include page="../content/header.jsp"></jsp:include>
 
-    <table class="table table-bordered table-striped">
-        <tr>
-            <th>ID</th>
-            <td>${blog.id}</td>
-        </tr>
-        <tr>
-            <th>Title</th>
-            <td>${blog.title}</td>
-        </tr>
-        <tr>
-            <th>Author</th>
-            <td>${blog.userByUserId.nickname}, ${blog.userByUserId.firstName} ${blog.userByUserId.lastName}</td>
-        </tr>
-        <tr>
-            <th>Content</th>
-            <td>${blog.content}</td>
-        </tr>
-        <tr>
-            <th>Publish Date</th>
-            <td><fmt:formatDate value="${blog.pubDate}" pattern="yyyy年MM月dd日"/></td>
-        </tr>
-    </table>
+
+<div class="container" style="padding-top: 100px">
+    <div class="row">
+        <article id="${blog.id}" class="post">
+            <div class="post-head">
+                <h5>${blog.title}</h5>
+                <div class="post-meta">
+                    <span class="author">作者：${blog.userByUserId.nickname}</span> •
+                    <time class="post-date">${blog.pubDate}</time>
+                    <div align="center">
+                        <c:if test="${blog.id!=firstid.id&&blog.id!=lastid.id}">
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-6 col-xs-6">
+                                    <a href="/blogs/showArticle.do?id=${ltitleid}">上一篇:${ltitle}</a>
+                                </div>
+                                <div class="col-lg-6 col-sm-6 col-xs-6">
+                                    <a href="/blogs/showArticle.do?id=${ntitleid}">下一篇:${ntitle}</a>
+                                </div>
+                            </div>
+                        </c:if>
+                        <c:if test="${blog.id==firstid.id&&blog.id!=lastid.id}">
+                            <a href="/blogs/showArticle.do?id=${ntitleid}">下一篇:${ntitle}</a>
+                        </c:if>
+                        <c:if test="${blog.id!=firstid.id&&blog.id==lastid.id}">
+                            <a href="/blogs/showArticle.do?id=${ltitleid}">上一篇:${ltitle}</a>
+                        </c:if>
+                        <c:if test="${blog.id==firstid.id&&blog.id==lastid.id}">
+                        </c:if>
+                    </div>
+                </div>
+            </div>
+            <div class="post-content">
+                ${blog.content}
+            </div>
+            <div class="ds-thread" data-thread-key="${blog.id}" data-title="${blog.title}" data-url="<%=request.getScheme()+"://"+request.getServerName()+new UrlPathHelper().getOriginatingRequestUri(request)%>"></div>
+            <!-- 多说评论框 end -->
+            <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+            <script type="text/javascript">
+                var duoshuoQuery = {short_name:"hidwight"};
+                (function() {
+                    var ds = document.createElement('script');
+                    ds.type = 'text/javascript';ds.async = true;
+                    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                    ds.charset = 'UTF-8';
+                    (document.getElementsByTagName('head')[0]
+                    || document.getElementsByTagName('body')[0]).appendChild(ds);
+                })();
+            </script>
+            <!-- 多说公共JS代码 end -->
+        </article>
+        <!-- 多说评论框 start -->
+
+
+    </div>
 </div>
 
-<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<jsp:include page="../content/footer.jsp"></jsp:include>
 </body>
 </html>

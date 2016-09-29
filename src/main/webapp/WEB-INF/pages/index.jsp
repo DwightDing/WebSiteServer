@@ -57,6 +57,7 @@
             </div>
             <div class="post-content">
                 <p>${blog.content}</p>
+                <
             </div>
             <%--<div class="post-permalink">--%>
                 <%--<a href="/ghost-zhuo-mian-ban-app-geng-xin-neng-gou-tong-shi-guan-li-duo-ge-ghost-bo-ke/" class="btn btn-default">阅读全文</a>--%>

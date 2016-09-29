@@ -51,7 +51,7 @@
     <div class="col-xs-12 col-md-4 col-lg-4" align="center">
 
 
-        <form class="login-form" action="login.do" method="post">
+        <form class="login-form" action="/login.do" method="post" commandName="login">
             <div style="height: 100px;width: 100px;border-radius: 50px;overflow: hidden;margin-bottom: 20px">
                 <img style="height: 100px;width: 100px;"src="images/avatar.jpg" rel="avatar">
             </div>

@@ -5,31 +5,33 @@ package com.dwightd.controller;
  */
 
 
-        import com.dwightd.model.BlogEntity;
-        import com.dwightd.model.UserEntity;
-        import com.dwightd.model.blogModel;
-        import com.dwightd.repository.BlogRepository;
-        import com.dwightd.repository.UserRepository;
+import com.dwightd.model.BlogEntity;
+import com.dwightd.model.UserEntity;
+import com.dwightd.model.blogModel;
+import com.dwightd.repository.BlogRepository;
+import com.dwightd.repository.UserRepository;
 
-        import java.io.IOException;
-        import java.util.ArrayList;
-        import java.util.List;
+import java.io.Console;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-        import com.google.gson.Gson;
-        import com.google.gson.GsonBuilder;
-        import com.sun.deploy.net.HttpResponse;
-        import com.sun.tools.internal.ws.wsdl.document.jaxws.Exception;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.stereotype.Controller;
-        import org.springframework.ui.ModelMap;
-        import org.springframework.web.bind.annotation.ModelAttribute;
-        import org.springframework.web.bind.annotation.PathVariable;
-        import org.springframework.web.bind.annotation.RequestMapping;
-        import org.springframework.web.bind.annotation.RequestMethod;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.sun.deploy.net.HttpResponse;
+import com.sun.tools.internal.ws.wsdl.document.jaxws.Exception;
+import com.sun.tracing.dtrace.Attributes;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-        import javax.servlet.ServletException;
-        import javax.servlet.http.HttpServletRequest;
-        import javax.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class MainController {
@@ -46,8 +48,9 @@ public class MainController {
             method = {RequestMethod.GET}
     )
     public String index() {
-        return "redirect:/index.do";
+        return "welcome";
     }
+
 
     @RequestMapping(
             value = {"/support"},
@@ -56,6 +59,7 @@ public class MainController {
     public String support() {
         return "support";
     }
+
     @RequestMapping(
             value = {"/private"},
             method = {RequestMethod.GET}
@@ -63,7 +67,8 @@ public class MainController {
     public String pri() {
         return "private";
     }
-//    @RequestMapping(
+
+    //    @RequestMapping(
 //            value = {"/new"},
 //            method = {RequestMethod.GET}
 //    )
@@ -79,67 +84,44 @@ public class MainController {
     public String callback(ModelMap modelMap) {
         return "index_new";
     }
+
     @RequestMapping(
             value = {"/api/getbloglist.do"},//拦截器
             method = {RequestMethod.GET}
     )
 
     public void blog(HttpServletResponse response) {
-        response.setHeader("ContentType","text／plain;charset=UTF-8");//设置返回json数据的编码
+        response.setHeader("ContentType", "text／plain;charset=UTF-8");//设置返回json数据的编码
         response.setCharacterEncoding("UTF-8");//设置编码
-        List <blogModel> list = new ArrayList<blogModel>();//获取所有博文内容
-        List <BlogEntity> blogList = this.blogRepository.findAll();//查询所有博文
-        for (BlogEntity obj:blogList){
+        List<blogModel> list = new ArrayList<blogModel>();//获取所有博文内容
+        List<BlogEntity> blogList = this.blogRepository.findAll();//查询所有博文
+        for (BlogEntity obj : blogList) {
             blogModel in = new blogModel();//模型匹配
             in.setTitle(obj.getTitle());
-            in.setContent(obj.getContent());
+            in.setDescribe(obj.getDescription());
             list.add(in);
         }
         Gson gson = new GsonBuilder().create();
         try {
 
             response.getWriter().write(gson.toJson(list));//Gson可解析的博文内容
-        }catch (IOException e){
+        } catch (IOException e) {
 
         }
     }
-    @RequestMapping(value = "/admin/blogs", method = RequestMethod.GET)
-    public String showBlogs(ModelMap modelMap) {
-        List<BlogEntity> blogList = this.blogRepository.findAll();
-        modelMap.addAttribute("blogList", blogList);
-        return "admin/blogs";
-    }
-    // 添加博文
-    @RequestMapping(value = "/admin/blogs/add", method = RequestMethod.GET)
-    public String addBlog(ModelMap modelMap) {
-        List userList = this.userRepository.findAll();
-        modelMap.addAttribute("userList", userList);
-        return "admin/addBlog";
+
+
+    @RequestMapping("/controller")
+    public String control() {
+        return "controller";
     }
 
     // 添加博文，POST请求，重定向为查看博客页面
-    @RequestMapping(value = "/admin/blogs/addP", method = RequestMethod.POST)
-    public String addBlogPost(@ModelAttribute("blog") BlogEntity blogEntity) {
-        this.blogRepository.saveAndFlush(blogEntity);
-        // 重定向地址
-        return "redirect:/admin/blogs";
-    }
-    // 查看博文详情，默认使用GET方法时，method可以缺省
-    @RequestMapping("/admin/blogs/show/{id}")
-    public String showBlog(@PathVariable("id") int id, ModelMap modelMap) {
-        BlogEntity blog = blogRepository.findOne(id);
-        modelMap.addAttribute("blog", blog);
-        return "admin/blogDetail";
-    }
+    @RequestMapping(value = "/login.do", method = RequestMethod.POST)
+    public String addLoginPost() {
 
-    @RequestMapping("/admin/blogs/delete/{id}")
-    public String deleteBlog(@PathVariable("id") int id) {
-        blogRepository.delete(id);
-        blogRepository.flush();
-        return "redirect:/admin/blogs";
-    }
-    @RequestMapping("/controller")
-    public String control(){
-        return "controller";
+        System.out.print("hhhhh");
+         // 重定向地址
+        return "redirect:/admin/login";
     }
 }

@@ -26,7 +26,7 @@
                 <li><a href="#service" class="smoothScroll">服务外包作品</a></li>
                 <li><a href="#speakers" class="smoothScroll">站点推荐</a></li>
                 <li><a href="#footer" class="smoothScroll">联系</a></li>
-                <li><a href="http://blog.dwightding.cn" class="smoothScroll">BLOG</a></li>
+                <li><a href="/blogs" class="smoothScroll">BLOG</a></li>
                 <li><a href="http://github.com/DwightDing" class="smoothScroll">GITHUB</a></li>
                 <li><a href="/admin/login" class="smoothScroll">用户登录</a></li>
             </ul>

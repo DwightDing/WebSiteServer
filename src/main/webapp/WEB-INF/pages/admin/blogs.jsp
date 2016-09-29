@@ -1,78 +1,90 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Dwight
-  Date: 16/7/3
-  Time: 下午10:48
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//zh-CN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>博客管理</title>
-
-    <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <script type="text/javascript">
+        //iOS Web APP中点击链接跳转到Safari 浏览器新标签页的问题
+        if (("standalone" in window.navigator) && window.navigator.standalone) {
+            var noddy, remotes = false;
+            document.addEventListener('click', function (event) {
+                noddy = event.target;
+                while (noddy.nodeName !== "A" && noddy.nodeName !== "HTML") {
+                    noddy = noddy.parentNode;
+                }
+                if ('href' in noddy && noddy.href.indexOf('http') !== -1 && (noddy.href.indexOf(document.location.host) !== -1 || remotes)) {
+                    event.preventDefault();
+                    document.location.href = noddy.href;
+                }
+            }, false);
+        }
+    </script>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1, minimum-scale=1.0, maximum-scale=1, user-scalable=no">
+    <title>Blog|如风的少年</title>
+    <link href="/css/vendor/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/screen.css" rel="stylesheet"/>
+    <link href="/css/flat-ui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/com.css"/>
+    <script src="/js/vendor/jquery.min.js"></script>
+    <script src="/js/vendor/video.js"></script>
+    <script src="/js/flat-ui.min.js"></script>
+    <script src="/js/side-bar.js"></script>
 </head>
-<body>
-<div class="container">
-    <h1>如风的少年博客系统-博客管理</h1>
-    <hr/>
+<body style="padding-bottom: 40px;background-color: #fbfbfb;height:100%">
+<jsp:include page="../content/header.jsp"></jsp:include>
 
-    <h3>所有博客 <a href="/admin/blogs/add" type="button" class="btn btn-primary btn-sm">添加</a></h3>
 
-    <!-- 如果用户列表为空 -->
-    <c:if test="${empty blogList}">
-        <div class="alert alert-warning" role="alert">
-            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>Blog表为空，请<a href="/admin/blogs/add" type="button" class="btn btn-primary btn-sm">添加</a>
-        </div>
-    </c:if>
-
-    <!-- 如果用户列表非空 -->
-    <c:if test="${!empty blogList}">
-        <table class="table table-bordered table-striped">
-            <tr>
-                <th>ID</th>
-                <th>标题</th>
-                <th>作者</th>
-                <th>发布日期</th>
-                <th>操作</th>
-            </tr>
+<div class="container" style="padding-top: 100px">
+    <div class="row">
+        <c:if test="${!empty blogList}">
 
             <c:forEach items="${blogList}" var="blog">
-                <tr>
-                    <td>${blog.id}</td>
-                    <td>${blog.title}</td>
-                    <td>${blog.userByUserId.nickname}, ${blog.userByUserId.firstName} ${blog.userByUserId.lastName}</td>
-                    <td><fmt:formatDate value="${blog.pubDate }" pattern="yyyy-MM-dd"/></td>
-                    <td>
-                        <a href="/admin/blogs/show/${blog.id}" type="button" class="btn btn-sm btn-success">详情</a>
-                        <a href="/admin/blogs/update/${blog.id}" type="button" class="btn btn-sm btn-warning">修改</a>
-                        <a href="/admin/blogs/delete/${blog.id}" type="button" class="btn btn-sm btn-danger">删除</a>
-                    </td>
-                </tr>
+                <article id="${blog.id}" class="post">
+                    <div class="post-head">
+                        <h5>${blog.title}</h5>
+                        <div class="post-meta">
+                            <span class="author">作者：${blog.userByUserId.nickname}</span> •
+                            <time class="post-date">${blog.pubDate}</time>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                            ${blog.description}
+                        <div align="center">
+                            <a href="/blogs/showArticle.do?id=${blog.id}">-点击阅读全文-</a>
+                        </div>
+                    </div>
+                </article>
+
             </c:forEach>
-        </table>
-    </c:if>
+        </c:if>
+
+    </div>
+    <div align="center">
+        <div class="pagination">
+            <ul>
+                <li class="previous"><a href="/blogs.do?pageNum=${lastp}" class="fui-arrow-left"></a></li>
+                <c:forEach begin="1" end="${allpages}" varStatus="status">
+                    <c:if test="${currentp+1==status.index}">
+                        <li class="active"><a href="/blogs.do?pageNum=${status.index-1}">${status.index}</a></li>
+                    </c:if>
+                    <c:if test="${currentp+1!=status.index}">
+                        <li class=""><a href="/blogs.do?pageNum=${status.index-1}">${status.index}</a></li>
+                    </c:if>
+
+                </c:forEach>
+
+                <li class="next"><a href="/blogs.do?pageNum=${nextp}" class="fui-arrow-right"></a></li>
+            </ul>
+        </div>
+    </div>
+
 </div>
 
-<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<jsp:include page="../content/footer.jsp"></jsp:include>
 </body>
 </html>

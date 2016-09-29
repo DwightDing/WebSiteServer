@@ -31,7 +31,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
+    <meta name='apple-itunes-app' content='app-id=1123425752'>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -223,7 +223,16 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12">
-                <p class="wow fadeInUp" data-wow-delay="0.3s">Copyright &copy; 2013-2015 如风的少年|Likewind</p>
+                <p class="wow fadeInUp" data-wow-delay="0.3s">Copyright &copy; 2013-2016 如风的少年|Likewind</p>
+                <div class="wow fadeInUp" style="width:300px;margin:0 auto; padding:20px 0;" data-wow-delay="0.4s">
+                    <a target="_blank"
+                       href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602005490"
+                       style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img
+                            src="/images/beian.png"
+                            style="float:left;"/>
+                        <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">浙公网安备
+                            33010602005490号</p></a>
+                </div>
                 <p class="wow fadeInUp" data-wow-delay="0.6s"><a href="http://www.miitbeian.gov.cn/">浙ICP备15042581号</a>️
                 </p>
                 <ul class="social-icon">

@@ -10,8 +10,13 @@
 <footer class="navbar-fixed-bottom" style="margin-bottom: 0px">
     <div class="container" align="center"
          style="padding-top: 5px; padding-bottom: 5px;">
-        <div class="row ">©2013-2015 如风的少年|Likewind </div>
-        <div><a href="http://www.miitbeian.gov.cn/">浙ICP备15042581号</a>️</div>
+        <div class="row ">©2013-2016 如风的少年 | <a href="http://www.miitbeian.gov.cn/">浙ICP备15042581号</a>️</div>
+        <div>
+            <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602005490">
+                <img src="/images/beian.png"/>浙公网安备33010602005490号</a>
+        </div>
+
+
     </div>
 </footer>
 <!--footer结束-->
