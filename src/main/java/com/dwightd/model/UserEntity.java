@@ -15,6 +15,7 @@ public class UserEntity {
     private String firstName;
     private String lastName;
     private Collection<BlogEntity> blogsById;
+    private String devicetoken;
 
     @Id
     @Column(name = "Id", nullable = false)
@@ -99,5 +100,15 @@ public class UserEntity {
 
     public void setBlogsById(Collection<BlogEntity> blogsById) {
         this.blogsById = blogsById;
+    }
+
+    @Basic
+    @Column(name = "devicetoken", nullable = true, length = 100)
+    public String getDevicetoken() {
+        return devicetoken;
+    }
+
+    public void setDevicetoken(String devicetoken) {
+        this.devicetoken = devicetoken;
     }
 }
