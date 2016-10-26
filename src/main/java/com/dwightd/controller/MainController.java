@@ -11,24 +11,24 @@ import com.dwightd.model.blogModel;
 import com.dwightd.repository.BlogRepository;
 import com.dwightd.repository.UserRepository;
 
-import java.io.Console;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.sun.deploy.net.HttpResponse;
-import com.sun.tools.internal.ws.wsdl.document.jaxws.Exception;
-import com.sun.tracing.dtrace.Attributes;
+import com.notnoop.apns.APNS;
+import com.notnoop.apns.ApnsService;
+import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.Response;
 
 @Controller
 public class MainController {
@@ -38,6 +38,51 @@ public class MainController {
     BlogRepository blogRepository;
 
     public MainController() {
+    }
+
+    //    APNS服务
+    @RequestMapping(
+            value = {"/pushserver"},
+            method = {RequestMethod.GET}
+    )
+    public String apnsserver() {
+        return "/APNSServer/PushServer";
+    }
+
+    //APNS Push
+    @RequestMapping(
+            value = {"/apnspush.do"},
+            method = {RequestMethod.POST}
+    )
+    public void apnspush(HttpServletRequest request) {
+        String payload;
+        String token;
+        String filePath = MainController.class.getClassLoader().getResource("/to/certificate.p12").getPath();
+        ApnsService service =
+                APNS.newService()
+                        .withCert(filePath, "123456")
+                        .withSandboxDestination()
+                        .build();
+        String jsonData = request.getParameter("Json");
+        if (jsonData!=""){
+            System.out.println("json");
+            payload = jsonData;
+        }else {
+            System.out.println("非json");
+            payload = APNS.newPayload()
+                    .badge(Integer.parseInt(request.getParameter("badge")==""? "0":request.getParameter("badge")))
+                    .alertTitle(request.getParameter("Title"))
+                    .alertBody(request.getParameter("Body"))
+                    .category(request.getParameter("category"))
+                    .sound(request.getParameter("Sound"))
+                    .build();
+        }
+        List<UserEntity> userlist = this.userRepository.findAll();
+        for (UserEntity obj : userlist)
+        {
+            token = obj.getDevicetoken();
+            service.push(token, payload);
+        }
     }
 
     @RequestMapping(

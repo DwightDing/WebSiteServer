@@ -72,7 +72,10 @@
       <data-type>varchar(45)|0</data-type>
       <default-expression>&apos;&apos;</default-expression>
     </column>
-    <key id="23" parent="7" name="PRIMARY">
+    <column id="23" parent="7" name="devicetoken">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <key id="24" parent="7" name="PRIMARY">
       <columns>Id</columns>
       <primary>1</primary>
     </key>
