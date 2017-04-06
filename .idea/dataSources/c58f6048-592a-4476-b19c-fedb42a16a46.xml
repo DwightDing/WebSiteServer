@@ -1,83 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="defaultPersistenceUnit/Hibernate">
-  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
-    <schema id="1" name="dwight">
-      <visible>1</visible>
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="dwight">
+      <Current>1</Current>
+      <Visible>1</Visible>
     </schema>
-    <schema id="2" name="information_schema"/>
-    <schema id="3" name="mysql"/>
-    <schema id="4" name="scheduling"/>
-    <schema id="5" name="test"/>
-    <table id="6" parent="1" name="blog"/>
-    <table id="7" parent="1" name="user"/>
-    <column id="8" parent="6" name="id">
-      <mandatory>1</mandatory>
-      <data-type>int(11)|0</data-type>
-      <sequence-identity>1</sequence-identity>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="scheduling"/>
+    <schema id="6" parent="1" name="test"/>
+    <table id="7" parent="2" name="blog"/>
+    <table id="8" parent="2" name="stuinfo"/>
+    <table id="9" parent="2" name="user"/>
+    <column id="10" parent="7" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="9" parent="6" name="title">
-      <mandatory>1</mandatory>
-      <data-type>varchar(100)|0</data-type>
+    <column id="11" parent="7" name="title">
+      <Position>2</Position>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
     </column>
-    <column id="10" parent="6" name="description">
-      <data-type>text|0</data-type>
+    <column id="12" parent="7" name="description">
+      <Position>3</Position>
+      <DataType>text|0</DataType>
     </column>
-    <column id="11" parent="6" name="content">
-      <data-type>longtext|0</data-type>
+    <column id="13" parent="7" name="content">
+      <Position>4</Position>
+      <DataType>longtext|0</DataType>
     </column>
-    <column id="12" parent="6" name="user_id">
-      <mandatory>1</mandatory>
-      <data-type>int(11)|0</data-type>
+    <column id="14" parent="7" name="user_id">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
     </column>
-    <column id="13" parent="6" name="pub_date">
-      <mandatory>1</mandatory>
-      <data-type>date|0</data-type>
+    <column id="15" parent="7" name="pub_date">
+      <Position>6</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
     </column>
-    <column id="14" parent="6" name="tags">
-      <data-type>char(11)|0</data-type>
+    <column id="16" parent="7" name="tags">
+      <Position>7</Position>
+      <DataType>char(11)|0</DataType>
     </column>
-    <index id="15" parent="6" name="user_id_idx">
-      <columns>user_id</columns>
-      <desc-columns></desc-columns>
+    <index id="17" parent="7" name="user_id_idx">
+      <ColNames>user_id</ColNames>
     </index>
-    <key id="16" parent="6" name="PRIMARY">
-      <columns>id</columns>
-      <primary>1</primary>
+    <key id="18" parent="7" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
     </key>
-    <foreign-key id="17" parent="6" name="user_id">
-      <columns>user_id</columns>
-      <ref-key>~.user.PRIMARY</ref-key>
-      <cascade-update-rule>no_action</cascade-update-rule>
-      <cascade-delete-rule>no_action</cascade-delete-rule>
+    <foreign-key id="19" parent="7" name="user_id">
+      <ColNames>user_id</ColNames>
+      <RefSchemaName>dwight</RefSchemaName>
+      <RefTableName>user</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>Id</RefColNames>
+      <OnUpdate>no-action</OnUpdate>
+      <OnDelete>no-action</OnDelete>
     </foreign-key>
-    <column id="18" parent="7" name="Id">
-      <mandatory>1</mandatory>
-      <data-type>int(11)|0</data-type>
-      <sequence-identity>1</sequence-identity>
+    <column id="20" parent="8" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
     </column>
-    <column id="19" parent="7" name="nickname">
-      <mandatory>1</mandatory>
-      <data-type>varchar(45)|0</data-type>
-      <default-expression>&apos;&apos;</default-expression>
+    <column id="21" parent="8" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;&apos;</DefaultExpression>
     </column>
-    <column id="20" parent="7" name="password">
-      <mandatory>1</mandatory>
-      <data-type>varchar(45)|0</data-type>
-      <default-expression>&apos;&apos;</default-expression>
+    <column id="22" parent="8" name="phone">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;&apos;</DefaultExpression>
     </column>
-    <column id="21" parent="7" name="first_name">
-      <data-type>varchar(45)|0</data-type>
+    <column id="23" parent="8" name="participate">
+      <Position>4</Position>
+      <DataType>varchar(11)|0</DataType>
     </column>
-    <column id="22" parent="7" name="last_name">
-      <data-type>varchar(45)|0</data-type>
-      <default-expression>&apos;&apos;</default-expression>
+    <key id="24" parent="8" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="25" parent="9" name="Id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="23" parent="7" name="devicetoken">
-      <data-type>varchar(100)|0</data-type>
+    <column id="26" parent="9" name="nickname">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;&apos;</DefaultExpression>
     </column>
-    <key id="24" parent="7" name="PRIMARY">
-      <columns>Id</columns>
-      <primary>1</primary>
+    <column id="27" parent="9" name="password">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;&apos;</DefaultExpression>
+    </column>
+    <column id="28" parent="9" name="first_name">
+      <Position>4</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="29" parent="9" name="last_name">
+      <Position>5</Position>
+      <DataType>varchar(45)|0</DataType>
+      <DefaultExpression>&apos;&apos;</DefaultExpression>
+    </column>
+    <column id="30" parent="9" name="devicetoken">
+      <Position>6</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <key id="31" parent="9" name="PRIMARY">
+      <ColNames>Id</ColNames>
+      <Primary>1</Primary>
     </key>
   </database-model>
 </dataSource>

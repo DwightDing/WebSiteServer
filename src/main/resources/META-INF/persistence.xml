@@ -5,9 +5,10 @@
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <class>com.dwightd.model.BlogEntity</class>
         <class>com.dwightd.model.UserEntity</class>
+        <class>com.dwightd.model.StuinfoEntity</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
-            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/dwight"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://139.129.23.89:3306/dwight"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
             <property name="hibernate.connection.username" value="dwight"/>
             <property name="hibernate.connection.password" value="cg661216"/>
