@@ -8,7 +8,6 @@
       </database-info>
       <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
       <user-name>dwight</user-name>
-      <user-password>dfc0dfcedfc8dfc9df90dfc7dfd3dfd9dfdbdfc6df90df85df85df9bdf98df9ddf84df9adf84df9adf84df9bdf90df99df99df9adf9cdf85dfcedfdddfc3dfcddfc2dfde</user-password>
       <introspection-schemas>*:dwight</introspection-schemas>
       <resolve-scope>*:dwight</resolve-scope>
       <unqualified-resolve-schemas>*:dwight</unqualified-resolve-schemas>
